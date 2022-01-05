@@ -1,0 +1,63 @@
+
+void CString::reverse()
+{
+	CString d((const char *)data);
+	
+	int i = 0; 
+	int a = size - 1;
+	for (   ; i<size; i++)
+	{
+		d.data[i] = data[a];
+
+		a = a - 1;
+	}
+	//cout << "value of a " << a;
+	d.data[i] = '\0';
+	//cout << "size of d  " << d.size;
+	this->~CString();
+
+	/*cout << d.data<<endl;
+	cout << "gdhgsh"<<endl;*/
+	data = d.data;
+	size = d.size;
+	d.data = nullptr;
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+void CString::resize(int a)
+{
+	if (a <= 0)
+	{
+		this->~CString();
+		return;
+	}
+	//size = a;
+	char * p = new char[a+1];
+	int i = 0;
+
+	for (; i < (a > size ? size : a); i++)         //(a > size ? size : a)
+	{
+		p[i] = data[i];
+	}
+
+
+	p[i] = '\0';
+
+	this->~CString();
+	data = p;
+	size = a;
+	//delete p;
+	p = nullptr;
+	
+}
